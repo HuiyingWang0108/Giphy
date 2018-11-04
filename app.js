@@ -3,7 +3,7 @@ $(function () {
     for (var i = 0; i < topics.length; i++) {
         $("#btn").append("<button id='imgeBtn' class='btn btn-info btn-sm' value='" + topics[i] + "'>" + topics[i] + "</button>");
     }
-    $(".btn.btn-info.btn-sm").on("click", function () {//#imgeBtn?????
+    $(document).on("click",".btn.btn-info.btn-sm", function () {//$(".btn.btn-info.btn-sm")
         $("#gifs-appear-here").empty();
         console.log($(this).val());
         var animal = $(this).val();
@@ -15,34 +15,37 @@ $(function () {
             var results = response.data;
             for (var n = 0; n < results.length; n++) {
                 var imgEle = $("<img>");//define tag img
+                var p=$("<p>");
                 imgEle.attr("src", results[n].images.original_still.url);
                 imgEle.attr("data-still", results[n].images.original_still.url);
                 imgEle.attr("data-animate", results[n].images.original.url);
+                p.text("Rating: "+results[n].rating);
                 // imgEle.attr("data-state", "still");
 
                 // imgEle.attr("valueId",  results[n].id);
                 // console.log("id",imgEle.attr("valueId"));
                 console.log("src", imgEle.attr("src"));
                 // $("#gifs-appear-here").append("<img valueId='" + response.data[n].id + "' src='" + response.data[n].images.original_still.url + "'>");
+                $("#gifs-appear-here").append(p);
                 $("#gifs-appear-here").append(imgEle);
-                $("img").on("click", function () {
-                    var aniUrl = $(this).attr("data-animate");
-                    var stillUrl = $(this).attr("data-still");
-                    var url = $(this).attr("src");
-                    src = (url == stillUrl)
-                    ? aniUrl
-                    : stillUrl;
-                    $(this).attr("src",src);
-                    // var state = $(this).attr("data-state");
-                    // if (state == 'still') {
-                    //     $(this).attr("src", $(this).attr("data-animate"));
-                    //     console.log($(this).attr("data-animate"));
-                    //     $(this).attr("data-state", 'animate');
-                    // } else {
-                    //     $(this).attr("src", $(this).attr("data-still"));
-                    //     $(this).attr("data-state", 'still');
-                    // }
-                });
+                // $("img").on("click", function () {
+                //     var aniUrl = $(this).attr("data-animate");
+                //     var stillUrl = $(this).attr("data-still");
+                //     var url = $(this).attr("src");
+                //     src = (url == stillUrl)
+                //     ? aniUrl
+                //     : stillUrl;
+                //     $(this).attr("src",src);
+                //     // var state = $(this).attr("data-state");
+                //     // if (state == 'still') {
+                //     //     $(this).attr("src", $(this).attr("data-animate"));
+                //     //     console.log($(this).attr("data-animate"));
+                //     //     $(this).attr("data-state", 'animate');
+                //     // } else {
+                //     //     $(this).attr("src", $(this).attr("data-still"));
+                //     //     $(this).attr("data-state", 'still');
+                //     // }
+                // });
             }
         });
     });
@@ -53,9 +56,28 @@ $(function () {
             alert("You have aready " + addimg + " button");
             return;
         } else {
-            $("#btn").append("<button id='imgeBtn' class='btn btn-info btn-lg' value='" + addimg + "'>" + addimg + "</button>");
+            topics.push(addimg);
+            $("#btn").append("<button id='imgeBtn' class='btn btn-info btn-sm' value='" + addimg + "'>" + addimg + "</button>");
         }
 
+    });
+    $(document).on("click","img", function () {
+        var aniUrl = $(this).attr("data-animate");
+        var stillUrl = $(this).attr("data-still");
+        var url = $(this).attr("src");
+        src = (url == stillUrl)
+        ? aniUrl
+        : stillUrl;
+        $(this).attr("src",src);
+        // var state = $(this).attr("data-state");
+        // if (state == 'still') {
+        //     $(this).attr("src", $(this).attr("data-animate"));
+        //     console.log($(this).attr("data-animate"));
+        //     $(this).attr("data-state", 'animate');
+        // } else {
+        //     $(this).attr("src", $(this).attr("data-still"));
+        //     $(this).attr("data-state", 'still');
+        // }
     });
     // $("img").on("click",function () 
     // $(document).on("click", "img", function () {

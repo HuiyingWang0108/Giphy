@@ -24,7 +24,7 @@ $(function () {
                 // console.log("id",imgEle.attr("valueId"));
                 console.log("src", imgEle.attr("src"));
                 // $("#gifs-appear-here").append("<img valueId='" + response.data[n].id + "' src='" + response.data[n].images.original_still.url + "'>");
-                $("#gifs-appear-here").prepend(imgEle);
+                $("#gifs-appear-here").append(imgEle);
                 $("img").on("click", function () {
                     var aniUrl = $(this).attr("data-animate");
                     var stillUrl = $(this).attr("data-still");

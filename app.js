@@ -8,7 +8,7 @@ $(function () {
         console.log($(this).val());
         var animal = $(this).val();
         //jquery
-        var url = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=zRB9LCcolb5ZTM75roz00qpYLPkrqvUX&limit=10";
+        var url = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=zRB9LCcolb5ZTM75roz00qpYLPkrqvUX&limit=10";
         console.log("success got url", url);
         var xhr = $.get(url);
         xhr.done(function (response) {
